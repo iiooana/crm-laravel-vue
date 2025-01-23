@@ -1,0 +1,52 @@
+services:
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "88:80"
+    volumes:
+      - ./code:/var/www/html
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    depends_on:  
+      - frontend
+    networks:
+      - crm_php_web  
+
+  frontend:
+    build: 
+      #DIRECTORY CONTEXT
+      context: ./build/php
+      #PATH TO DIR WHERE IS DOCKERFILE
+      dockerfile: Dockerfile
+      #ADD ADDITIONAL CONTEXT TO USER IN DOCKER FILE WITH --from=name
+      additional_contexts:
+        resource_code: ./code
+      #BUILD ARGUMENTS
+      args:
+        PHP_VERSION: "8.4-fpm"  
+    expose:
+      - 9000
+    networks:
+      - crm_db_php
+      - crm_php_web
+
+  db_postgres:
+    image: postgres
+    #size of shared memory in /dev/shm allocated for building docker image
+    shm_size: 10mb
+    networks:
+      - crm_db_php
+    ports:
+      - "5435:5432"
+    env_file:
+      - ./prod.env
+    volumes:
+      - ./db_postgres_volume:/var/lib/postgresql/data  
+
+
+networks:
+  crm_php_web:
+    driver: bridge
+  crm_db_php:
+    driver: bridge  
+

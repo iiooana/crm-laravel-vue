@@ -26,6 +26,8 @@ services:
         PHP_VERSION: "8.4-fpm"  
     expose:
       - 9000
+    ports:
+      - "5188:5188"
     networks:
       - crm_db_php
       - crm_php_web

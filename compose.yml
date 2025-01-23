@@ -29,6 +29,8 @@ services:
     networks:
       - crm_db_php
       - crm_php_web
+    volumes:
+      - ./code:/var/www/html  
 
   db_postgres:
     image: postgres

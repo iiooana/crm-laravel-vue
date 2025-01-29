@@ -18,9 +18,8 @@ return new class extends Migration
             $table->string('first_name');
             $table->string('last_name')->nullable();
             $table->date('birth_day')->nullable();
-            $table->enum('gender',['Male','Female','Other']);
+            $table->enum('gender',['Male','Female','Not-binary','Prefer not to Answer','Other']);
             $table->timestamps();
-            $table->
 
             $table->softDeletes();
         });

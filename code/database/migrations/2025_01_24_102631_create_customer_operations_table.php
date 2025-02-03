@@ -15,11 +15,11 @@ return new class extends Migration
     {
         Schema::create('customer_operations', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Customer::class);
-            $table->foreignIdFor(User::class);
-            $table->foreignIdFor(TypeOperation::class);
+            $table->foreignIdFor(Customer::class)->constrained();
+            $table->foreignIdFor(User::class)->constrained();
+            $table->foreignIdFor(TypeOperation::class)->constrained();
             $table->json('data')->nullable();
-            $table->stirng('note')->nullable();
+            $table->string('note')->nullable();
             $table->timestamp('created_at')->useCurrent();
         });
     }

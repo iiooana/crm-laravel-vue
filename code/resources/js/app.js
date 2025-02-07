@@ -1,7 +1,7 @@
 import '../css/app.css';
 import './bootstrap';
 
-import { createInertiaApp } from '@inertiajs/vue3';
+import { createInertiaApp,Head, Link } from '@inertiajs/vue3';
 import { createApp, h } from 'vue';
 import Layout from './Layouts/Layout.vue';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy';
@@ -21,6 +21,7 @@ createInertiaApp({
       .use(plugin)
       .use(ZiggyVue)
       .component("Head", Head)
+      .component("Link", Link)
       .mount(el)
   },
   progress: {

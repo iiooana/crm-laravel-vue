@@ -33,7 +33,7 @@ class CustomerController extends Controller
     {
        
        $fields = $request->validate([
-            "first_name"=>'required|max:255',
+            "first_name"=>'required|min:2|max:255',
             "last_name"=> 'required|max:255',
             "gender" => "required"
         ]);

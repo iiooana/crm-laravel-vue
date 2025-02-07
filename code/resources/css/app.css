@@ -15,8 +15,8 @@
     button{
         @apply rounded-lg px-2 py-1
     }
-    input[type="text"], select {
-        @apply w-full rounded-lg
+    input[type=text], select {
+        @apply w-full rounded-lg focus:border-indigo-500 focus:ring-indigo-500
     }
     em{
         @apply text-red-500

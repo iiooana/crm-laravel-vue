@@ -1,5 +1,6 @@
 <script setup>
     import { useForm } from '@inertiajs/vue3';
+    import TextInput from '@/Components/TextInput.vue';
     const form = useForm({
         first_name: null,
         last_name: null,
@@ -16,14 +17,10 @@
         <form @submit.prevent="submit">
             <div class="grid grid-cols-2 xs:grid-cols-1 gap-2 mx-auto">
                 <div>
-                    <label>First Name *</label>
-                    <input type="text" v-model="form.first_name" />
-                    <em>{{ form.errors.first_name }}</em>
+                   <TextInput label="First Name * "  v-model="form.first_name" :message="form.errors.first_name"  />
                 </div>
                 <div>
-                    <label>Last Name *</label>
-                    <input type="text" v-model="form.last_name" />
-                    <em>{{ form.errors.last_name }}</em>
+                    <TextInput label="Last Name *"  v-model="form.last_name" :message="form.errors.last_name"  />
                 </div>
                 <div>
                     <label>Gender *</label>

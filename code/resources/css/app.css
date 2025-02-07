@@ -12,13 +12,16 @@
     a:hover{
         @apply bg-slate-600 text-white rounded-lg
     }
+    button{
+        @apply rounded-lg px-2 py-1
+    }
     input[type="text"] {
         @apply w-full rounded-lg
     }
 }
 
 @layer components{
-    .btn-form {
-        @apply bg-green-400;
+    .btn-primary {
+        @apply bg-blue-200
     }
 }

@@ -6,16 +6,15 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::get("/", function () {
-    sleep(3);
     return Inertia::render('Dashboard');
-});
+})->name('dashboard');
 Route::get('/about', function(){
     return Inertia::render('About');
-});
+})->name('about');
 
 //TODO: login page
 //TODO: forgot password
 //TODO: dashboard page
 
 require __DIR__ . '/auth.php';
-;
+

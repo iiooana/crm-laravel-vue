@@ -12,7 +12,10 @@
                         <Link :href="route('dashboard')">Dashboard</Link>
                     </li>
                     <li class="ml-1">
-                        <Link :href="route('about')">About</Link>
+                        <Link :href="route('customers.index')">Customers</Link>
+                    </li>
+                    <li class="ml-1">
+                        <Link :href="route('customers.create')">Add Customer</Link>
                     </li>
                 </ul>
             </nav>

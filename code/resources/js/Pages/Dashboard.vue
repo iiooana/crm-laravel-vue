@@ -8,5 +8,4 @@ import { Head } from '@inertiajs/vue3';
         <meta head-key="description" name="description" value="Meta tag on dashboard page">
     </Head>
     <h1>Dashboard</h1>
-    
 </template>

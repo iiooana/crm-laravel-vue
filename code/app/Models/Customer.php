@@ -12,6 +12,11 @@ use App\Enums\Gender;
 class Customer extends Model
 {
     use SoftDeletes;
+    protected $fillable = [
+        'first_name',
+        'last_name',
+        'gender'
+    ];
 
     protected function casts(): array{
         return  [

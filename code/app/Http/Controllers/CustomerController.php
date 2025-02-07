@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use App\Models\Customer;
+use App\Enums\Gender;
 
 class CustomerController extends Controller
 {
@@ -29,7 +31,16 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        dd("ciao",$request);
+       
+       $fields = $request->validate([
+            "first_name"=>'required|max:255',
+            "last_name"=> 'required|max:255',
+            "gender" => "required"
+        ]);
+
+        $customer = Customer::create($fields);
+        return redirect()->route('customers.index');
+
     }
 
     /**

@@ -15,13 +15,19 @@
     button{
         @apply rounded-lg px-2 py-1
     }
-    input[type="text"] {
+    input[type="text"], select {
         @apply w-full rounded-lg
+    }
+    em{
+        @apply text-red-500
     }
 }
 
 @layer components{
     .btn-primary {
-        @apply bg-blue-200
+        @apply bg-blue-500
+    }
+    .btn-primary[disabled] {
+        @apply bg-blue-100
     }
 }

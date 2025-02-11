@@ -19,18 +19,12 @@
         message: {
             type: String,
         },
-        placeholder: {
-            type: String,
-            default: '',
-        },
     });
 </script>
 <template>
     <label>{{ label }} <span v-if="isRequired" class="text-red-600 font-bold">*</span></label>
     <input :type="type" v-model="model" 
     :class="{'!ring-red-500 border-red-500':message}" 
-    :aria-placeholder="placeholder"
-    :placeholder="placeholder"
     />
     <em v-if="message">{{ message }}</em>
 </template>

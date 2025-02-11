@@ -10,9 +10,7 @@ Route::get("/", function () {
 
 Route::resource('customers',CustomerController::class);
 
-//TODO: login page
-//TODO: forgot password
-//TODO: dashboard page
+
 
 require __DIR__ . '/auth.php';
 

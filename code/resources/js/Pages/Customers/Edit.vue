@@ -12,7 +12,7 @@
 </script>
 <template>
     <!--<Head><title>Add Customer</title></Head> -->
-  <div>
+  <div> 
         <h1>Add customer</h1>
         <form @submit.prevent="submit">
             <div class="grid grid-cols-2 xs:grid-cols-1 gap-2 mx-auto">

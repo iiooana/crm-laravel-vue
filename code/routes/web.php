@@ -11,6 +11,4 @@ Route::get("/", function () {
 Route::resource('customers',CustomerController::class);
 
 
-
 require __DIR__ . '/auth.php';
-

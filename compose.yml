@@ -33,6 +33,7 @@ services:
       - crm_php_web
     volumes:
       - ./code:/var/www/html  
+      - ./build/php/php.ini:/usr/local/etc/php/php_custom.ini
 
   db_postgres:
     image: postgres

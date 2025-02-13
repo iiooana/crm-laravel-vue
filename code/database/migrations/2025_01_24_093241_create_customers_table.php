@@ -16,8 +16,7 @@ return new class extends Migration
             $table->string('first_name');
             $table->string('last_name')->nullable();
             $table->date('birth_day')->nullable();
-            //FIXME enum column DOES NOT WORK
-            $table->enum('gender',['Male','Female','Not-binary','Prefer not to Answer','Other']);
+            $table->enum('gender',['Male','Female','Not-binary','Prefer not to Answer','Other'])->nullable();
             $table->timestamps();
 
             $table->softDeletes();

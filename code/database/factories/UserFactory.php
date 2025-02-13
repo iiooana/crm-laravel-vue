@@ -30,8 +30,10 @@ class UserFactory extends Factory
             'last_name' => fake()->name(),
             'email' =>   fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
+            'last_login'=> now(),
+            'IP' => fake()->ipv4(),
+            'MAC'=> fake()->macAddress(),
             'password' => static::$password ??= Hash::make('password'),
-            'remember_token' => Str::random(10),
         ];
     }
 

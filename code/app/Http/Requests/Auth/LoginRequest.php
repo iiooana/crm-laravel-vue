@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
+use App\Models\User;
 
 class LoginRequest extends FormRequest
 {
@@ -40,6 +41,13 @@ class LoginRequest extends FormRequest
     public function authenticate(): void
     {
         $this->ensureIsNotRateLimited();
+        //TODO:
+        //1. Se la mail non è verificare chiedere di verificare la mail
+        if(User::where('email',$this->email)->count() == 0){
+            throw ValidationException::withMessages([
+                'email' => trans('auth.email_not_exist')
+            ]);
+        }   
 
         if (! Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
             RateLimiter::hit($this->throttleKey());

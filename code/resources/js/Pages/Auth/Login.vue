@@ -25,7 +25,7 @@
     <form @submit.prevent="submit">
         <div class="grid grid-cols-1 gap-3">
             <TextInput label="Email" type="email" isRequired="true" placeholder="doe@example.com" v-model="form.email" :message="form.errors.email"  />
-            <Password  label="Password" aria-placeholder="Password" isRequired="true" v-model="form.password" :message="form.errors.password" />
+            <Password  label="Password" aria-placeholder="Password"  v-model="form.password" :message="form.errors.password" />
             <div class="flex justify-center">
                 <PrimaryButton>Login</PrimaryButton>                
             </div>

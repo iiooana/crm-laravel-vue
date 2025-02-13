@@ -15,7 +15,7 @@
     button{
         @apply rounded-lg px-2 py-1
     }
-    input[type=text],input[type=email], select {
+    input[type=text],input[type=email],input[type=password], select {
         @apply w-full rounded-lg focus:border-blue-700 focus:ring-blue-700
     }
     em{

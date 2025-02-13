@@ -1,4 +1,10 @@
 <script setup>
+import { useForm } from '@inertiajs/vue3';
+import PrimaryButton from '@/Components/PrimaryButton.vue';
+const form = useForm({});
+const submit = () => {
+    form.post('/logout');
+}
 </script>
 <template>
     <Head>
@@ -17,6 +23,11 @@
                     </li>
                     <li class="ml-1">
                         <Link :href="route('customers.create')">Add Customer</Link>
+                    </li>
+                    <li class="ml-1">
+                        <form @submit.prevent="submit">
+                            <PrimaryButton>Logout</PrimaryButton>
+                        </form>
                     </li>
                 </ul>
             </nav>

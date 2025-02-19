@@ -41,13 +41,16 @@ class LoginRequest extends FormRequest
     public function authenticate(): void
     {
         $this->ensureIsNotRateLimited();
-        //TODO:
-        //1. Se la mail non è verificare chiedere di verificare la mail
+        //check if email exist
         if(User::where('email',$this->email)->count() == 0){
             throw ValidationException::withMessages([
                 'email' => trans('auth.email_not_exist')
             ]);
-        }   
+        } 
+        
+        //email not verified
+        
+        //more then 20 days login
 
         if (! Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
             RateLimiter::hit($this->throttleKey());

@@ -10,7 +10,7 @@ import { Link } from '@inertiajs/vue3';
         <div><ApplicationLogo class="h-20 w-20 fill-current text-gray-500" /></div>
 
         <div
-            class="mt-2 w-full overflow-hidden bg-white mx-auto p-4 shadow-md sm:max-w-md sm:rounded-lg dark:bg-gray-800"
+            class="mt-2 w-full overflow-hidden bg-white mx-auto p-4 drop-shadow-md sm:max-w-md sm:rounded-lg dark:bg-gray-800"
         >
             <slot />
         </div>

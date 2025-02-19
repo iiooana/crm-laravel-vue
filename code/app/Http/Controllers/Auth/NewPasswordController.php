@@ -24,6 +24,7 @@ class NewPasswordController extends Controller
         return Inertia::render('Auth/ResetPassword', [
             'email' => $request->email,
             'token' => $request->route('token'),
+            'password_requirements' => __('auth.password_requirements'),
         ]);
     }
 
@@ -34,12 +35,18 @@ class NewPasswordController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+        //min 8, almeno un maiuscolo o un minuscolo, almeno one letters, almeno un numero, almeno un simbolo
+        $rule_password = Rules\Password::defaults();
+        $rule_password->mixedCase();
+        $rule_password->letters();
+        $rule_password->numbers();
+        $rule_password->symbols();
+        
         $request->validate([
             'token' => 'required',
             'email' => 'required|email',
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'password' => ['required', 'confirmed',$rule_password ],
         ]);
-
         // Here we will attempt to reset the user's password. If it is successful we
         // will update the password on an actual user model and persist it to the
         // database. Otherwise we will parse the error and return the response.
@@ -59,7 +66,7 @@ class NewPasswordController extends Controller
         // the application's home authenticated view. If there is an error we can
         // redirect them back to where they came from with their error message.
         if ($status == Password::PASSWORD_RESET) {
-            return redirect()->route('login')->with('status', __($status));
+            return redirect()->route('login')->with('success', __($status));
         }
 
         throw ValidationException::withMessages([

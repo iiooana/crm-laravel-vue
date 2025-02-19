@@ -14,11 +14,12 @@
     });
 
     //ref use to primite variable
-    //reactive for object remeber .value
-    const forgot_div = ref(false)
+    //reactive for object
+    // remember ".value"
+    let forgot_div = ref(false)
 
     const submit = () => {
-        if(!forgot_div){
+        if(!forgot_div.value){
             form.post('/login');
         }else{
             form.post('/forgot-password',{

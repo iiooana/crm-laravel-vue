@@ -3,6 +3,7 @@
         type: null,
         required: true,
     })
+    //Variables that inherit from pather
     defineProps({
         label: {
             type: String,

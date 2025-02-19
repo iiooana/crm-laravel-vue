@@ -1,7 +1,5 @@
-# CRM WITH LARAVEL
+# CRM WITH LARAVEL AND VUE.JS (v3)
 
 
-#TODO
-- login page
-- forgot password
-- dashboard
+
+

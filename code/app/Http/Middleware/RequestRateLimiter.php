@@ -32,7 +32,6 @@ class RequestRateLimiter
                 return response('Too many requests.',429);
             }
         }
-
         return $next($request);
     }
 }

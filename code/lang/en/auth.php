@@ -14,6 +14,7 @@ return [
     */
 
     'email_not_exist' => 'The email field does not exists in our system.',
+    'email_notification' => 'You will reiceve an email to :email to verify you address email. ',
     'failed' => 'These credentials do not match our records.',
     'password' => 'The provided password is incorrect.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',

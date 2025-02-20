@@ -41,17 +41,16 @@ class LoginRequest extends FormRequest
     public function authenticate(): void
     {
         $this->ensureIsNotRateLimited();
+        $user = User::where('email', $this->email)->firstOrFail();
+
         //check if email exist
-        if(User::where('email',$this->email)->count() == 0){
+        if (empty($user->id)) {
             throw ValidationException::withMessages([
                 'email' => trans('auth.email_not_exist')
             ]);
-        } 
-        
-        //email not verified
-        
-        //more then 20 days login
+        }
 
+        //more then 20 day login                                                                                                                                                                                                                                                                                                
         if (! Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
             RateLimiter::hit($this->throttleKey());
 
@@ -91,6 +90,6 @@ class LoginRequest extends FormRequest
      */
     public function throttleKey(): string
     {
-        return Str::transliterate(Str::lower($this->string('email')).'|'.$this->ip());
+        return Str::transliterate(Str::lower($this->string('email')) . '|' . $this->ip());
     }
 }

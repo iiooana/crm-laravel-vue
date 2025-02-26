@@ -29,11 +29,9 @@ class ResetEmailVerify implements ShouldQueue, ShouldBeUnique
         $carbon = new Carbon('now');
         $date = $carbon->subDays(20);
         //Reset the email verify at
-        User::where('last_login','<=',$date->toDateTimeString())->update([
+        User::where('last_login', '<=', $date->toDateTimeString())->update([
             'email_verified_at' => null
         ]);
     }
-    public function failed(?Throwable $exception){
-
-    }
+    public function failed(?Throwable $exception) {}
 }

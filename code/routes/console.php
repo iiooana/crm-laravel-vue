@@ -4,6 +4,9 @@ use App\Jobs\ResetEmailVerify;
 use Illuminate\Support\Facades\Schedule;
 
 
-Schedule::call(function(){
+Schedule::call(function () {
     dispatch(new ResetEmailVerify);
-})->everyMinute();
+})->daily()
+    ->name('email.reset.verify')
+    ->onOneServer()
+    ->runInBackground();

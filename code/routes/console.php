@@ -8,5 +8,5 @@ Schedule::call(function () {
     dispatch(new ResetEmailVerify);
 })->daily()
     ->name('email.reset.verify')
-    ->onOneServer()
-    ->runInBackground();
+    ->onOneServer();
+   // ->runInBackground(); TODO: config multi server

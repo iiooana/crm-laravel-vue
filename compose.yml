@@ -34,6 +34,7 @@ services:
     volumes:
       - ./code:/var/www/html  
       - ./build/php/php.ini:/usr/local/etc/php/php_custom.ini
+      - ./build/php/supervisor.conf:/etc/supervisor/conf.d/laravel_supervisor.conf
 
   db_postgres:
     image: postgres

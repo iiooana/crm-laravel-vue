@@ -17,5 +17,3 @@ Schedule::call(function () {
 })->everyMinute()
     ->name('email.reset.verify')
     ->onOneServer();
-
-sleep(1);//for supervisor

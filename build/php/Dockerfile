@@ -1,6 +1,5 @@
 #ini and set default value
 ARG PHP_VERSION=8.2-fpm
-
 FROM php:"${PHP_VERSION}"
 
 COPY --from=resource_code / /var/www/html
@@ -31,9 +30,6 @@ RUN pecl install xdebug && docker-php-ext-enable xdebug
 #CONFIGURE STEP
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg && docker-php-ext-install -j$(nproc) gd
 
-#SUPERVISOR
-RUN apt-get install -y supervisor
-#TODO automatic process
 
 #INSTALL COMPOSER STEP
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
@@ -45,7 +41,7 @@ RUN groupadd -g 1000 wwww-data
 #SET USER useradd/usermod
 RUN usermod -u 1000 -g www-data www-data
 RUN chown www-data:www-data -R /var/www
-USER www-data
 
+USER www-data
 #COMMAND
-CMD ["php-fpm"]
+ENTRYPOINT ["php-fpm"]

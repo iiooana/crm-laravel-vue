@@ -13,6 +13,7 @@ services:
       - crm_php_web  
 
   frontend:
+    image: crm_vue_frontend:latest
     build: 
       #DIRECTORY CONTEXT
       context: ./build/php
@@ -34,7 +35,13 @@ services:
     volumes:
       - ./code:/var/www/html  
       - ./build/php/php.ini:/usr/local/etc/php/php_custom.ini
-      - ./build/php/supervisor.conf:/etc/supervisor/conf.d/laravel_supervisor.conf
+  supervisor:
+      build:
+        context: ./build/supervisor
+      volumes:
+        - ./code:/var/www/html
+      depends_on:
+        - frontend    
 
   db_postgres:
     image: postgres
@@ -48,7 +55,6 @@ services:
       - ./prod.env
     volumes:
       - ./db_postgres_volume:/var/lib/postgresql/data  
-
 
 networks:
   crm_php_web:

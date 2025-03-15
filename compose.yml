@@ -41,7 +41,9 @@ services:
       volumes:
         - ./code:/var/www/html
       depends_on:
-        - frontend    
+        - frontend
+      networks:
+        - crm_db_php      
 
   db_postgres:
     image: postgres

@@ -4,6 +4,7 @@ namespace App\Jobs;
 
 use App\Models\User;
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Contracts\Broadcasting\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Throwable;

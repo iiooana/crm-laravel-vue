@@ -2,3 +2,4 @@
 
 
 CRM for managing customers.
+This project is still ongoing and not yet complete.

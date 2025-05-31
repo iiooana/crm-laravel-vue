@@ -35,15 +35,15 @@ services:
     volumes:
       - ./code:/var/www/html  
       - ./build/php/php.ini:/usr/local/etc/php/php_custom.ini
-  supervisor:
-      build:
-        context: ./build/supervisor
-      volumes:
-        - ./code:/var/www/html
-      depends_on:
-        - frontend
-      networks:
-        - crm_db_php      
+  #supervisor:
+  #    build:
+  #      context: ./build/supervisor
+  #    volumes:
+  #      - ./code:/var/www/html
+  #    depends_on:
+  #      - frontend
+  #    networks:
+  #      - crm_db_php      
 
   db_postgres:
     image: postgres

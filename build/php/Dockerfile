@@ -37,7 +37,7 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 #RUN apt-get autoremove
 
 #SET GROUP groupadd/groupmod
-RUN groupadd -g 1000 www-data
+RUN groupmod -g 1000 www-data
 #SET USER useradd/usermod
 RUN usermod -u 1000 -g www-data www-data
 RUN chown www-data:www-data -R /var/www

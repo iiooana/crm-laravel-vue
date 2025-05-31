@@ -32,13 +32,13 @@ const submit = () => {
                 </ul>
             </nav>
         -->
-            <nav class="bg-sky-950 py-4 px-4 rounded-b-lg">
+            <nav class="bg-sky-950 py-4 px-4 rounded-b-lg uppercase ">
                 <ul class="flex gap-2">
                     <li>
                         <Link class="text-white rounded-lg bg-sky-800/50 py-2 px-4" :href="route('dashboard')">Dashboard</Link> 
                     </li>
                     <li>
-                        <Link class="text-white rounded-lg py-2 px-4" :href="route('dashboard')">Websites</Link> 
+                        <Link class="text-white rounded-lg< py-2 px-4" :href="route('dashboard')">Websites</Link> 
                     </li>
                 </ul>
             </nav>

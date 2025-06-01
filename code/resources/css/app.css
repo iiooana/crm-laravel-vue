@@ -1,13 +1,27 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+
+@config '../../tailwind.config.js';
+
+@theme {
+  --color-sail-50: #f0f8ff;
+  --color-sail-100: #dfefff;
+  --color-sail-200: #b7e0ff;
+  --color-sail-300: #79c8ff;
+  --color-sail-400: #32adfe;
+  --color-sail-500: #0793f0;
+  --color-sail-600: #0074cd;
+  --color-sail-700: #005ca6;
+  --color-sail-800: #034e89;
+  --color-sail-900: #094271;
+  --color-sail-950: #06294b;
+}
 
 @layer base{
     body {
-        @apply bg-sky-50
+        @apply bg-sail-50 dark:bg-sail-950
     }
     h1 {
-        @apply text-3xl
+        @apply text-3xl dark:text-white
     }
     button{
         @apply rounded-lg px-2 py-1
@@ -18,8 +32,4 @@
     em{
         @apply text-red-500
     }
-}
-
-@layer components{
-
 }

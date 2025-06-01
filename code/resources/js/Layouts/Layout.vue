@@ -1,6 +1,5 @@
 <script setup>
 import { useForm } from '@inertiajs/vue3';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
 const form = useForm({});
 const submit = () => {
     form.post('/logout');
@@ -12,9 +11,10 @@ const submit = () => {
     </Head>
     <div>
         <header>
-           <!-- <nav class="bg-blue-400 px-2 text-gray-800 min-h-10 text-md font-bold flex felx-row items-center shadow-md uppercase tracking-tight ">
-                <ul class="flex w-[100%] justify-around">
-                      <ul class="flex w-[100%] justify-around" v-if="$page.props.auth.user">
+            
+           <!-- TODO: REMOVE UNUSED <nav class="bg-blue-400 px-2 text-gray-800 min-h-10 text-md font-bold flex felx-row items-center shadow-md uppercase tracking-tight ">
+                <ul class="flex w-full justify-around">
+                      <ul class="flex w-full justify-around" v-if="$page.props.auth.user">
                     <li>
                         <Link :href="route('dashboard')">Dashboard</Link>
                     </li>
@@ -32,13 +32,13 @@ const submit = () => {
                 </ul>
             </nav>
         -->
-            <nav class="bg-sky-950 py-4 px-4 rounded-b-lg uppercase ">
+            <nav class="bg-sail-600 dark:bg-sail-800 text-black font-semibold py-4 px-4 rounded-b-lg uppercase ">
                 <ul class="flex gap-2">
                     <li>
-                        <Link class="text-white rounded-lg bg-sky-800/50 py-2 px-4" :href="route('dashboard')">Dashboard</Link> 
-                    </li>
+                        <Link class=" bg-sail-100 dark:bg-sail-600  leading-1 -tracking-tight rounded-lg py-2 px-4" :href="route('dashboard')">Dashboard</Link> 
+                    </li>   
                     <li>
-                        <Link class="text-white rounded-lg< py-2 px-4" :href="route('dashboard')">Websites</Link> 
+                        <Link class="rounded-lg py-2 px-4" :href="route('websites.index')">Websites</Link> 
                     </li>
                 </ul>
             </nav>

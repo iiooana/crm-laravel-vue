@@ -32,7 +32,7 @@
 <template>
     <label>{{ label }} <span class="text-red-600 font-bold">*</span></label>
     <div class="relative">
-        <input :type="type" v-model="model" required="true" :class="['focus:italic',{ '!ring-red-500 border-red-500': message }]"
+        <input :type="type" v-model="model" required="true" :class="['focus:italic',{ 'ring-red-500! border-red-500': message }]"
             aria-label="Password" />
 
         <button type="button" class="absolute inset-y-0 right-3 flex items-center text-gray-500 hover:text-gray-900"

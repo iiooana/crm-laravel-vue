@@ -1,17 +1,20 @@
 <?php
-
-use App\Http\Controllers\CustomerController;
+use App\Http\Middleware\AuthMiddleware;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-use App\Http\Middleware\AuthMiddleware;
 
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\WebsiteController;
+
+//TODO CHECK MIGRATIONS
+//TODO CHCK CONTROLLERS
 Route::middleware([AuthMiddleware::class])->group(function (){
     
     Route::get("/", function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
-    
     Route::resource('customers',CustomerController::class);
+    Route::resource('websites', WebsiteController::class);
 
 });
 

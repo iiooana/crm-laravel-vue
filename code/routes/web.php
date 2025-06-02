@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 use App\Http\Controllers\CustomerController;
-use App\Http\Controllers\WebsiteController;
+use App\Http\Controllers\Website\WebsiteController;
 
 //TODO CHECK MIGRATIONS
 //TODO CHCK CONTROLLERS

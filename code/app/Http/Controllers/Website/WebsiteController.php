@@ -1,15 +1,16 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Website;
 
-use App\Models\Website;
+use App\Http\Controllers\Controller;
+use App\Models\Website\Website;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Validator;
 
 class WebsiteController extends Controller
 {
-    
+//TODO ADD NAMESPACE WEBSITE    
     /**
      * Display a listing of the resource.
      */

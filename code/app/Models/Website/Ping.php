@@ -9,6 +9,13 @@ use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 
 class Ping extends Model
 {
+    public $timestamps = false;
+    protected $fillable = [
+        "website_ping_setting_id",
+        "status_code",
+        "headers",
+        "body"
+    ];
     /**
      * Get the WebsitePingSetting
      * @return WebsitePingSetting

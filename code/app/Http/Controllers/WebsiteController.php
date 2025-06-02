@@ -40,6 +40,8 @@ class WebsiteController extends Controller
         $validator->after(function ($validator) use ($request){
             if(Website::where('domain',$request->domain)->count() > 0){
                 $validator->errors()->add('domain','This domain already exits.');
+            }else if(Website::withTrashed()->where('domain',$request->domain)->count() > 0){
+                $validator->errors()->add('domain','This domain is trashed, make a request to active it.');
             }
         });
         if($validator->fails()){

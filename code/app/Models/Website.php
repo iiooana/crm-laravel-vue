@@ -21,8 +21,8 @@ class Website extends Model
     protected function casts(): array
     {
         return [
-            'created_at' => 'datetime: H:i d/m/Y',
-            'updated_at' => 'datetime: H:i d/m/Y'
+            'created_at' => 'datetime:H:i d/m/Y',
+            'updated_at' => 'datetime:H:i d/m/Y'
         ];
     }
 }

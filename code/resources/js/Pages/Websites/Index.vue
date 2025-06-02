@@ -1,19 +1,26 @@
 <script setup>
 import { Head,Link } from '@inertiajs/vue3';
-import Table from '@/Components/Table.vue';
+import AgGridTable from '@/Components/AgGridTable.vue';
+
 
 const props = defineProps({
     websites:Object
 });
-const headers = ['#','Domain','Created At', 'Updated At','Actions']
+const columns = [
+    { headerName: "#", field: "id", width: 60 },
+    { headerName: "Domain", field: "domain", sortable: true, filter: true },
+    { headerName: "Created at", field: "created_at", sortable:true, filter:true},
+    {headerName : "Updated At", field: "updated_at", sortable: true}
+]
+const rows =  props.websites.data.map( (website) => ({
+    id: website.id,
+    domain: website.domain,
+    created_at: website.created_at,
+    updated_at: website.updated_at
+}) )
 
-const rows =  props.websites.data.map( (website,index) => [
-    website.id,
-    website.domain,
-    website.created_at,
-    website.updated_at,
-    "<Link></Link>"
-])
+console.log("cols ",columns);
+console.log("rows ",rows);
 
 </script>
 <template>
@@ -30,7 +37,9 @@ const rows =  props.websites.data.map( (website,index) => [
             New website
         </Link>
     </div>
-    <div class="overflow-x-auto">
-        <Table :headers="headers" :rows="rows" />
+
+    <div class="">
+        <AgGridTable :columns="columns" :rows="rows" />
     </div>
+   
 </template>

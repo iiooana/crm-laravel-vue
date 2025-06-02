@@ -6,6 +6,17 @@ import { createApp, h } from 'vue';
 import Layout from './Layouts/Layout.vue';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy';
 
+//region AgGridVuew
+import { AgGridVue } from 'ag-grid-vue3';
+import { AllCommunityModule, ModuleRegistry } from 'ag-grid-community'; 
+// Register all Community features
+ModuleRegistry.registerModules([AllCommunityModule]);
+import { provideGlobalGridOptions } from 'ag-grid-community';
+// Mark all grids as using legacy themes
+provideGlobalGridOptions({ theme: "legacy" });
+//endregion
+
+
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
 createInertiaApp({
@@ -22,6 +33,7 @@ createInertiaApp({
       .use(ZiggyVue)
       .component("Head", Head)
       .component("Link", Link)
+      .component("AgGridVue", AgGridVue)
       .mount(el)
   },
   progress: {

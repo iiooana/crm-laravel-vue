@@ -1,4 +1,7 @@
 <script setup>
+
+
+//check if delete   
 defineProps({
     headers: {
         type: Array,
@@ -43,4 +46,12 @@ defineProps({
 
         </div>
     </div>
+    <!-- The AG Grid component -->
+    <ag-grid-vue
+        :rowData="rows"
+        :columnDefs="headers"
+        style="height: 500px"
+    >
+    </ag-grid-vue>
+
 </template>

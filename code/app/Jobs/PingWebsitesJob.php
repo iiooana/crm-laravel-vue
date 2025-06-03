@@ -4,11 +4,10 @@ namespace App\Jobs;
 
 use App\Models\Website\Ping;
 use App\Models\Website\WebsitePingSetting;
-use App\Models\Website\Website;
+
 
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Support\Facades\Http;
-Use Telegram\Bot\Api;
 
 class PingWebsitesJob 
 {
@@ -27,6 +26,7 @@ class PingWebsitesJob
      */
     public function handle(): void
     {
+        //php artisan schedule:work
         $current_minute = date('i');
         if( WebsitePingSetting::active()->count() > 0){
             $websites_settings = WebsitePingSetting::active()->get();
@@ -43,19 +43,11 @@ class PingWebsitesJob
                 $array['status_code'] =  $request->status();
                 $array['headers'] = json_encode($request->headers());
 
-                if($request->status() != 200 || 1){
+                if($request->status() != 200 ){
                     $array['body'] = $request->body();
                     //send telegram alert
-                    $telegram = new Api(getenv('TELEGRAM_API_TOKEN'));
-                    $telegram->sendMessage([
-                        'chat_id' => getenv('TELEGRAM_CHAT_ID') ,
-                        'text' => 'DANGER '.$website->domain.' not available - STATUS: '.$request->status()."- ".date('H:i:s d/m/Y')
-                    ]);
-                    $telegram->sendMessage([
-                        'chat_id' => getenv('TELEGRAM_CHAT_ID') ,
-                        'text' => var_export($array['headers'],true)
-                    ]);
-                    //php artisan schedule:work
+                    sendTelegramMessage('🔴 DANGER '.$website->domain.' not available - STATUS CODE: '.$request->status()."- ".date('H:i:s d/m/Y'));
+                    sendTelegramMessage(var_export($array['headers'],true));                    
                 }              
                 Ping::create($array);
             }

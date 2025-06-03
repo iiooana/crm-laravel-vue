@@ -6,13 +6,13 @@ use App\Models\Website\Ping;
 use App\Models\Website\WebsitePingSetting;
 use App\Models\Website\Website;
 
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Foundation\Queue\Queueable;
+use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Support\Facades\Http;
+Use Telegram\Bot\Api;
 
-class PingWebsitesJob implements ShouldQueue
+class PingWebsitesJob 
 {
-    use Queueable;
+    use Dispatchable;
 
     /**
      * Create a new job instance.
@@ -27,7 +27,8 @@ class PingWebsitesJob implements ShouldQueue
      */
     public function handle(): void
     {
-        $current_minute = date('m');
+        $current_minute = date('i');
+        dump($current_minute,$current_minute % 5);
         if( WebsitePingSetting::active()->count() > 0){
             $websites_settings = WebsitePingSetting::active()->get();
             foreach($websites_settings as $websites_settings){
@@ -37,7 +38,7 @@ class PingWebsitesJob implements ShouldQueue
                     dump("Skip");
                     continue;//skip
                 }
-                $request = Http::head('https://'.$website->domain);
+                $request = Http::head('https://'.$website->domain);//default 30s as timeout
                 $array = [];
                 $array['website_ping_setting_id'] = $websites_settings->id;
                 $array['status_code'] =  $request->status();
@@ -46,6 +47,12 @@ class PingWebsitesJob implements ShouldQueue
                 if($request->status() != 200){
                     $array['body'] = $request->body();
                     //send telegram alert
+                    $telegram = new Api(getenv('TELEGRAM_API_TOKEN'));
+                    $telegram->sendMessage([
+                        'chat_id' => getenv('TELEGRAM_CHAT_ID') ,
+                        'text' => 'DANGER: WEBSITE '.$website->domain.' not available - STATUS: '.$request->status()."- ".date('H:i:s d/m/Y')
+                    ]);
+                    //php artisan schedule:work
                 }              
                 Ping::create($array);
             }

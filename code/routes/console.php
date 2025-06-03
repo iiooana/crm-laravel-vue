@@ -20,8 +20,6 @@ Schedule::call(function () {
     ->onOneServer();
 */
 
-Schedule::call(function (){
-    dispatch(new PingWebsitesJob);
-})->everyMinute()->name('websites.ping')->onOneServer();
 
+Schedule::job(new PingWebsitesJob)->everyMinute();
 

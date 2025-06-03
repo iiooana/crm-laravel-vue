@@ -6,7 +6,6 @@ use Inertia\Inertia;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\Website\WebsiteController;
 
-use App\Jobs\PingWebsitesJob;
 //TODO CHECK MIGRATIONS
 //TODO CHCK CONTROLLERS
 Route::middleware([AuthMiddleware::class])->group(function (){
@@ -16,9 +15,7 @@ Route::middleware([AuthMiddleware::class])->group(function (){
     })->name('dashboard');
     Route::resource('customers',CustomerController::class);
     Route::resource('websites', WebsiteController::class);
+
 });
-
-
-
 
 require __DIR__ . '/auth.php'; 

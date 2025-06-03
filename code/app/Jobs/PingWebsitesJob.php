@@ -9,7 +9,7 @@ use App\Models\Website\WebsitePingSetting;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Support\Facades\Http;
 
-class PingWebsitesJob 
+class PingWebsitesJob
 {
     use Dispatchable;
 
@@ -28,30 +28,41 @@ class PingWebsitesJob
     {
         //php artisan schedule:work
         $current_minute = date('i');
-        if( WebsitePingSetting::active()->count() > 0){
+        if (WebsitePingSetting::active()->count() > 0) {
             $websites_settings = WebsitePingSetting::active()->get();
-            foreach($websites_settings as $websites_settings){
+            foreach ($websites_settings as $websites_settings) {
                 $website = $websites_settings->website;
-                if($websites_settings->every_minute != 1 && $current_minute % $websites_settings->every_minute != 0 ){
+                if ($websites_settings->every_minute != 1 && $current_minute % $websites_settings->every_minute != 0) {
                     dump("Skip");
-                    continue;//skip
+                    continue; //skip
                 }
-                dump("Request : ". $website->domain);
-                $request = Http::head('https://'.$website->domain);//default 30s as timeout
+                dump("Request : " . $website->domain);
+                $request = Http::head('https://' . $website->domain); //default 30s as timeout
                 $array = [];
                 $array['website_ping_setting_id'] = $websites_settings->id;
                 $array['status_code'] =  $request->status();
                 $array['headers'] = json_encode($request->headers());
 
-                if($request->status() != 200 ){
-                    $array['body'] = $request->body();
+
+                if ($request->status() != 200) {
+                    Ping::create($array);
                     //send telegram alert
-                    sendTelegramMessage('🔴 DANGER '.$website->domain.' not available - STATUS CODE: '.$request->status()."- ".date('H:i:s d/m/Y'));
-                    sendTelegramMessage(var_export($array['headers'],true));                    
-                }              
-                Ping::create($array);
+                    sendTelegramMessage('🔴 DANGER ' . $website->domain . ' not available - STATUS CODE: ' . $request->status() . "- " . date('H:i:s d/m/Y'));
+                    sendTelegramMessage(var_export($array['headers'], true));
+
+                    //region new request for the body
+                    $request = Http::get('https://' . $website->domain); //default 30s as timeout
+                    $array = [];
+                    $array['website_ping_setting_id'] = $websites_settings->id;
+                    $array['status_code'] =  $request->status();
+                    $array['headers'] = json_encode($request->headers());
+                    $array['body'] = $request->body();
+                    Ping::create($array);
+                    //endregion new request for the body
+                } else {
+                    Ping::create($array);
+                }
             }
-           
         }
     }
 }

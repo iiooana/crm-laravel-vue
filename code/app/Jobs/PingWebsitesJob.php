@@ -28,29 +28,32 @@ class PingWebsitesJob
     public function handle(): void
     {
         $current_minute = date('i');
-        dump($current_minute,$current_minute % 5);
         if( WebsitePingSetting::active()->count() > 0){
             $websites_settings = WebsitePingSetting::active()->get();
             foreach($websites_settings as $websites_settings){
                 $website = $websites_settings->website;
-                dump("Request : ". $website->domain);
                 if($websites_settings->every_minute != 1 && $current_minute % $websites_settings->every_minute != 0 ){
                     dump("Skip");
                     continue;//skip
                 }
+                dump("Request : ". $website->domain);
                 $request = Http::head('https://'.$website->domain);//default 30s as timeout
                 $array = [];
                 $array['website_ping_setting_id'] = $websites_settings->id;
                 $array['status_code'] =  $request->status();
                 $array['headers'] = json_encode($request->headers());
 
-                if($request->status() != 200){
+                if($request->status() != 200 || 1){
                     $array['body'] = $request->body();
                     //send telegram alert
                     $telegram = new Api(getenv('TELEGRAM_API_TOKEN'));
                     $telegram->sendMessage([
                         'chat_id' => getenv('TELEGRAM_CHAT_ID') ,
-                        'text' => 'DANGER: WEBSITE '.$website->domain.' not available - STATUS: '.$request->status()."- ".date('H:i:s d/m/Y')
+                        'text' => 'DANGER '.$website->domain.' not available - STATUS: '.$request->status()."- ".date('H:i:s d/m/Y')
+                    ]);
+                    $telegram->sendMessage([
+                        'chat_id' => getenv('TELEGRAM_CHAT_ID') ,
+                        'text' => var_export($array['headers'],true)
                     ]);
                     //php artisan schedule:work
                 }              
